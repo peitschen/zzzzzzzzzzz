@@ -67,21 +67,22 @@ while len(dirs) >=1 :
         ws.title=str(ret1)
         dom = minidom.parse('sample.acaml')
         root = dom.documentElement
-        BeginTimes=[]
-        BeginTime=dom.getElementsByTagName("BeginTime") 
-        for i in range(len(BeginTime)):
-            BeginTimes.append(BeginTime[i].getAttribute("val"))
-        del BeginTimes[0: 2]
-        BeginTimes.insert(0,"时间")
-        for i in range(len(BeginTimes)):
-            ws.cell(i+1,1,BeginTimes[i])
-        AreaPercents=[]
-        AreaPercent=dom.getElementsByTagName("AreaPercent") 
-        for i in range(len(AreaPercent)): 
-            AreaPercents.append(AreaPercent[i].getAttribute("val"))
-        AreaPercents.insert(0,"峰面积")
-        for i in range(len(AreaPercents)):
-            ws.cell(i+1,2,AreaPercents[i])
+        RetentionTimes=[]
+        RetentionTime=dom.getElementsByTagName("RetentionTime") 
+        for i in range(len(RetentionTime)):
+            RetentionTimes.append(RetentionTime[i].getAttribute("val"))
+        #del RetentionTimes[0: 2]
+        RetentionTimes.insert(0,"时间")
+        for i in range(len(RetentionTimes)):
+            ws.cell(1,i+1,RetentionTimes[i])
+        Areas=[]
+        Area=dom.getElementsByTagName("Area") 
+        for i in range(len(Area)): 
+            Areas.append(Area[i].getAttribute("val"))
+        Areas=split_list(Areas)
+        Areas.insert(0,"峰面积")
+        for i in range(len(Areas)):
+            ws.cell(2,i+1,Areas[i])
         Heights=[]
         Height=dom.getElementsByTagName("Height") 
         for i in range(len(Height)):
@@ -89,21 +90,21 @@ while len(dirs) >=1 :
         Heights=split_list(Heights)
         Heights.insert(0,"峰高")
         for i in range(len(Heights)):
-            ws.cell(i+1,3,Heights[i])
+            ws.cell(3,i+1,Heights[i])
         WidthBases=[]
         WidthBase=dom.getElementsByTagName("WidthBase")  
         for i in range(len(WidthBase)):  
             WidthBases.append(WidthBase[i].getAttribute("val"))
         WidthBases.insert(0,"峰宽")
         for i in range(len(WidthBases)):
-            ws.cell(i+1,4,WidthBases[i])
+            ws.cell(4,i+1,WidthBases[i])
         Symmetrys=[]
         Symmetry=dom.getElementsByTagName("Symmetry")  
         for i in range(len(Symmetry)):  
             Symmetrys.append(Symmetry[i].getAttribute("val"))
         Symmetrys.insert(0,"对称因子")
         for i in range(len(Symmetrys)):
-            ws.cell(i+1,5,Symmetrys[i])
+            ws.cell(5,i+1,Symmetrys[i])
     
         AreaPercents=[]
         AreaPercent=dom.getElementsByTagName("AreaPercent") 
@@ -111,7 +112,7 @@ while len(dirs) >=1 :
             AreaPercents.append(AreaPercent[i].getAttribute("val"))
         AreaPercents.insert(0,"峰面积占比")
         for i in range(len(AreaPercents)):
-            ws.cell(i+1,6,AreaPercents[i])
+            ws.cell(6,i+1,AreaPercents[i])
 
 
         wb.save(filename=str(ret1)+'.xlsx')
